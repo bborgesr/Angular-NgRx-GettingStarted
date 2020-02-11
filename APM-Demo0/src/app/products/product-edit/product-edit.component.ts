@@ -124,11 +124,12 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   deleteProduct(): void {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
-        this.productService.deleteProduct(this.product.id).subscribe({
-          next: () =>
-            this.store.dispatch(new productActions.ClearCurrentProduct()),
-          error: err => (this.errorMessage = err.error)
-        });
+        this.store.dispatch(new productActions.DeleteProduct(this.product.id));
+        // this.productService.deleteProduct(this.product.id).subscribe({
+        //   next: () =>
+        //     this.store.dispatch(new productActions.ClearCurrentProduct()),
+        //   error: err => (this.errorMessage = err.error)
+        // });
       }
     } else {
       // No need to delete, it was never saved
@@ -146,22 +147,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
         if (p.id === 0) {
           this.store.dispatch(new productActions.AddProduct(p));
-          // this.productService.createProduct(p).subscribe({
-          //   next: product =>
-          //     this.store.dispatch(
-          //       new productActions.SetCurrentProduct(product)
-          //     ),
-          //   error: err => (this.errorMessage = err.error)
-          // });
         } else {
           this.store.dispatch(new productActions.UpdateProduct(p));
-          // this.productService.updateProduct(p).subscribe({
-          //   next: product =>
-          //     this.store.dispatch(
-          //       new productActions.SetCurrentProduct(product)
-          //     ),
-          //   error: err => (this.errorMessage = err.error)
-          // });
         }
       }
     } else {

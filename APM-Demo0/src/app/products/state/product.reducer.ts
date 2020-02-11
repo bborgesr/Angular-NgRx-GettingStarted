@@ -128,6 +128,22 @@ export function reducer(
         ...state,
         error: action.payload
       };
+    case ProductActionTypes.DeleteProductSuccess:
+      const filteredProducts: Product[] = state.products.filter(el => {
+        el.id !== action.payload;
+      });
+      console.log(filteredProducts);
+      return {
+        ...state,
+        products: filteredProducts,
+        currentProductId: null,
+        error: ""
+      };
+    case ProductActionTypes.DeleteProductFail:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }
