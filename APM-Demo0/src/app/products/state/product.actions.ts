@@ -73,6 +73,8 @@ export class UpdateProductFail implements Action {
 
 export class AddProduct implements Action {
   readonly type = ProductActionTypes.AddProduct;
+
+  constructor(public payload: Product) {}
 }
 
 export class AddProductSuccess implements Action {
@@ -97,4 +99,7 @@ export type ProductActions =
   | LoadFail
   | UpdateProduct
   | UpdateProductSuccess
-  | UpdateProductFail;
+  | UpdateProductFail
+  | AddProduct
+  | AddProductSuccess
+  | AddProductFail;

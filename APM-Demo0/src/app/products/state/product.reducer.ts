@@ -115,6 +115,19 @@ export function reducer(
         ...state,
         error: action.payload
       };
+    case ProductActionTypes.AddProductSuccess:
+      const allProducts: Product[] = [...state.products, action.payload];
+      return {
+        ...state,
+        products: allProducts,
+        currentProductId: action.payload.id,
+        error: ""
+      };
+    case ProductActionTypes.AddProductFail:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }
