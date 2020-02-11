@@ -125,11 +125,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (this.product && this.product.id) {
       if (confirm(`Really delete the product: ${this.product.productName}?`)) {
         this.store.dispatch(new productActions.DeleteProduct(this.product.id));
-        // this.productService.deleteProduct(this.product.id).subscribe({
-        //   next: () =>
-        //     this.store.dispatch(new productActions.ClearCurrentProduct()),
-        //   error: err => (this.errorMessage = err.error)
-        // });
+        this.store.dispatch(new productActions.Load());
       }
     } else {
       // No need to delete, it was never saved

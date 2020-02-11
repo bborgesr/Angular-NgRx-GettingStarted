@@ -28,10 +28,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   sub: Subscription;
   products$: Observable<Product[]>;
 
-  constructor(
-    private productService: ProductService,
-    private store: Store<fromProduct.State>
-  ) {}
+  constructor(private store: Store<fromProduct.State>) {}
 
   ngOnInit(): void {
     this.store
@@ -45,12 +42,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(new productActions.Load());
     this.products$ = this.store.pipe(select(fromProduct.getProducts));
-    // this.store
-    //   .pipe(
-    //     select(fromProduct.getProducts),
-    //     takeWhile(() => this.componentActive)
-    //   )
-    //   .subscribe((products: Product[]) => (this.products = products));
 
     this.store
       .pipe(

@@ -132,7 +132,6 @@ export function reducer(
       const filteredProducts: Product[] = state.products.filter(el => {
         el.id !== action.payload;
       });
-      console.log(filteredProducts);
       return {
         ...state,
         products: filteredProducts,
